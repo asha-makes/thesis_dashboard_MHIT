@@ -8,7 +8,6 @@ function TopBar() {
         </div>
     </div>
 
-
   )
 }
 
