@@ -1,14 +1,14 @@
-function TopBar() {
-  return (
-    <div className = "flex justify-between px-8 py-4 bg-gray-200">
-        <h1>Green Star Game</h1>
-        <div className = "flex justify-center gap-4">
-        <h1>Round 1</h1>
-        <button type="button">Rules</button>
-        </div>
-    </div>
+export default function TopBar() {
 
-  )
+    return (
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
+                <a className="navbar-brand ps-3 h1 fs-3" href="#">Game Title Placeholder</a>
+                <ul className="navbar-nav navbar-flex-row ms-auto me-3 fs-3">
+                    <li className="nav-item"><a className="nav-link" href="#">📚 Rules</a></li>
+                </ul>
+    
+        </nav>
+    )
+
+
 }
-
-export default TopBar

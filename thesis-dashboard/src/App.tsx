@@ -1,18 +1,25 @@
 import './App.css'
-import TopBar from './TopBar'
-import WildCard from './WildCard'
+import TopBar from './TopBar.tsx';
+import BudgetCard from './BudgetCard.tsx';
+import SustainabilityScore from './SustainabilityScore.tsx';
+import { useState } from 'react';
+
 
 
 function App() {
-  return (
-    <div className="h-screen">
 
+  // Budget State Tracker
+  const [budgetCounter, setBudgetCounter] = useState(20)
+  const [sustainabilityPoints, setSustainabilityPoints] = useState(5)
+
+  return (
+    <div>
       <TopBar />
-      <WildCard />
+      <BudgetCard budget={budgetCounter} maxBudget = {100}></BudgetCard>
+      <SustainabilityScore points = {sustainabilityPoints}  pointsAim = {100} synergyIncrease={() => setSustainabilityPoints(p => p+1)}></SustainabilityScore>
     </div>
 
-  
   )
 }
 
-export default App
+export default App;
