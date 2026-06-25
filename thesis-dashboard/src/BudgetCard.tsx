@@ -1,5 +1,6 @@
-// BudgetCard.tsx
-import ProgressBar from 'react-bootstrap/ProgressBar';
+// Imports 
+import ProgressBar from 'react-bootstrap/ProgressBar'
+import Card from 'react-bootstrap/Card'
 
 
 export default function BudgetCard({ budget, maxBudget }: { budget: number, maxBudget: number }) {
@@ -8,10 +9,19 @@ export default function BudgetCard({ budget, maxBudget }: { budget: number, maxB
 
     return (
 
-        <div className="ms-5 mt-3">
-            <h1>💰 {budget} Tokens</h1>
-            <ProgressBar now={budgetPercentage} label={`${budgetPercentage}%`} variant="danger"  />
+        <Card className="text-center h-100" >
+            <Card.Header className="text-white bg-primary"><h3>Budget Spent</h3></Card.Header>
 
-        </div>
+            <Card.Body>
+                <Card.Text><h5>💰 {budget}  / {maxBudget} Tokens</h5></Card.Text>
+
+                <ProgressBar now={budgetPercentage} label={`${budgetPercentage}%`} variant="primary" />
+
+
+            </Card.Body>
+        </Card>
+
+
+
     )
 }
