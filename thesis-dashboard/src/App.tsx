@@ -6,7 +6,7 @@ import CardInput from './CardInput.tsx'
 import WildCard from './WildCard.tsx';
 import RulesModal from './RulesModal.tsx'
 import { useState } from 'react';
-
+import { cards } from './Cards.ts'
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -16,14 +16,55 @@ import Col from 'react-bootstrap/Col';
 function App() {
 
   // States
-  const [budgetCounter, setBudgetCounter] = useState(8)
+  const [budgetCounter, setBudgetCounter] = useState(100)
   const [sustainabilityPoints, setSustainabilityPoints] = useState(0)
-  const [modalShow,setModalShow] = useState(false)
+  const [modalShow, setModalShow] = useState(false)
+  const [inputText, setInputText] = useState('')
+  const [playedCards, setPlayedCards] = useState<string[]>([])
+
+  // Handling Card Input
+  const handleInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+
+      const currentCard = cards[inputText as keyof typeof cards]
+
+      if (playedCards.includes(inputText)) {
+        if (currentCard.type === 'sustainability') {
+          setBudgetCounter(prev => prev - currentCard.budget / 2)
+          setSustainabilityPoints(prev => prev - currentCard.sustainability)
+        } else if (currentCard.type === 'event') {
+          setBudgetCounter(prev => prev - currentCard.budget)
+          setSustainabilityPoints(prev => prev - currentCard.sustainability)
+        }
+        setPlayedCards(prev => prev.filter(c => c !== inputText))
+        setInputText('')
+        return
+      }
+
+
+ 
+      // if not in the card list 
+      if (!currentCard) {
+        setInputText('')
+        return
+      }
+
+      // Update Scores
+      setBudgetCounter(prev => prev + currentCard.budget)
+      setSustainabilityPoints(prev => prev + currentCard.sustainability)
+
+      // Push it to the list of previously played cards
+      setPlayedCards(prev => [...prev, inputText])
+      setInputText('')
+
+    }
+
+  }
 
   return (
 
     <div >
-      <TopBar setModalShow = {setModalShow}/>
+      <TopBar setModalShow={setModalShow} />
 
       <Container className="mt-5" >
         <Row className="align-items-stretch">
@@ -32,14 +73,13 @@ function App() {
 
         </Row>
         <Row className="align-items-stretch">
-          <Col><CardInput></CardInput></Col>
+          <Col><CardInput handleInput={handleInput} inputText={inputText} setInputText={setInputText} playedCards={playedCards}></CardInput></Col>
           <Col> <WildCard></WildCard> </Col>
         </Row>
-       
 
       </Container>
 
-      <RulesModal modalShow = {modalShow} setModalShow={setModalShow}></RulesModal>
+      <RulesModal modalShow={modalShow} setModalShow={setModalShow}></RulesModal>
 
     </div>
 

@@ -12,7 +12,7 @@ export default function SustainabilityScore({ points, pointsAim, synergyIncrease
 
             <Card.Header className="bg-success text-white"><h3>Sustainability Score</h3></Card.Header>
             <Card.Body>
-                <Card.Text><h5>🌱 {points} / {pointsAim} Points</h5></Card.Text>
+                <h5>🌱 {points} / {pointsAim} Points</h5>
 
                 <ProgressBar now={percentageSustainabilityScore} label={`${percentageSustainabilityScore}%`} variant="success" />
 
@@ -20,15 +20,6 @@ export default function SustainabilityScore({ points, pointsAim, synergyIncrease
 
             </Card.Body>
         </Card>
-
-
-
-
-
-
-
-
-
 
 
     )
