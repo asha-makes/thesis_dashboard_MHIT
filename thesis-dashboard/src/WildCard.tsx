@@ -1,18 +1,21 @@
 import Card from 'react-bootstrap/Card'
 
-export default function () {
+type WildCardProps = {
+  activeWildCard: { key: string, title: string, description: string, budget: number } | null
+}
 
-    return (
-        <Card className="text-center mt-3 mb-3" >
-            <Card.Header className="bg-danger text-white"><h3>Event Card</h3></Card.Header>
-            <Card.Body>
-                <Card.Text>Description placeholder</Card.Text>
-                <Card.Text>💰 - Budget Impact Passed In</Card.Text>
-                <Card.Text>Protections</Card.Text>
-            </Card.Body>
-        </Card>
+export default function WildCard({ activeWildCard }: WildCardProps) {
 
-    )
+  if (!activeWildCard) return null
 
-
+  return (
+    <Card className="text-center mt-3 mb-3">
+      <Card.Header className="bg-danger text-white"><h3>{activeWildCard.key} - Event Card</h3></Card.Header>
+      <Card.Body>
+        <Card.Text>{activeWildCard.title}</Card.Text>
+        <Card.Text>{activeWildCard.description}</Card.Text>
+        <Card.Text>💰 Budget Impact: {activeWildCard.budget}</Card.Text>
+      </Card.Body>
+    </Card>
+  )
 }
